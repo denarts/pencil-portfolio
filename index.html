@@ -5,6 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Denarts Studio — Fine Pencil & Charcoal Realism</title>
   
+  <!-- Open Graph / Social Media Preview Tags -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://denarts.github.io/pencil-portfolio/">
+  <meta property="og:title" content="Denarts Studio — Fine Pencil & Charcoal Realism">
+  <meta property="og:description" content="Custom hand-drawn portraits, wildlife, and hyper-realistic charcoal artwork. Inquire for custom commissions.">
+  <meta property="og:image" content="https://denarts.github.io/pencil-portfolio/images/igathe.jpg">
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,9 +33,8 @@
 
     * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
     body { background-color: var(--bg-dark); color: var(--text-main); font-family: 'Inter', sans-serif; line-height: 1.6; }
-    h1, h2, h3 { font-family: 'Playfair Display', serif; }
+    h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
 
-    /* Custom Scrollbar */
     ::-webkit-scrollbar { width: 8px; }
     ::-webkit-scrollbar-track { background: var(--bg-dark); }
     ::-webkit-scrollbar-thumb { background: #2a2a32; border-radius: 4px; }
@@ -46,9 +52,9 @@
     .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1.5px; transition: var(--transition); }
     .nav-links a:hover { color: #fff; }
 
-    /* Hero Header */
+    /* Hero */
     .hero {
-      min-height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
+      min-height: 75vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
       text-align: center; padding: 8rem 2rem 4rem;
       background: radial-gradient(circle at 50% 30%, #1e1e26 0%, var(--bg-dark) 70%);
     }
@@ -67,29 +73,66 @@
     }
     .btn:hover { background: transparent; color: #ffffff; transform: translateY(-2px); }
 
-    /* Gallery Section */
-    .gallery-section { padding: 5rem 8%; max-width: 1400px; margin: 0 auto; }
+    /* Sections Shared Styling */
+    section { padding: 5rem 8%; max-width: 1400px; margin: 0 auto; }
     .section-title { text-align: center; margin-bottom: 3.5rem; }
     .section-title h2 { font-size: 2.2rem; color: #fff; margin-bottom: 0.5rem; }
     .section-title p { color: var(--text-muted); font-size: 0.9rem; }
 
-    .gallery-grid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 2rem;
+    /* ==========================================================================
+       2. BEFORE & AFTER SLIDER
+       ========================================================================== */
+    .slider-section { background: var(--bg-surface); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); max-width: 100%; }
+    .slider-container {
+      position: relative; width: 100%; max-width: 850px; height: 480px; margin: 0 auto;
+      border-radius: 6px; overflow: hidden; border: 1px solid var(--border-subtle);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.8); user-select: none;
+    }
+    .slider-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
+    .img-after { width: 50%; z-index: 2; border-right: 2px solid #ffffff; overflow: hidden; }
+    .img-after img { width: 850px; height: 100%; object-fit: cover; max-width: none; filter: grayscale(100%) contrast(115%); }
+    .slider-handle {
+      position: absolute; top: 0; bottom: 0; left: 50%; width: 40px; margin-left: -20px;
+      z-index: 3; cursor: ew-resize; display: flex; align-items: center; justify-content: center;
+    }
+    .handle-circle {
+      width: 36px; height: 36px; background: #ffffff; border-radius: 50%;
+      box-shadow: 0 0 15px rgba(0,0,0,0.7); display: flex; align-items: center; justify-content: center;
+      color: #000; font-size: 11px; font-weight: bold;
     }
 
+    /* ==========================================================================
+       3. PRICING & SIZE GUIDE
+       ========================================================================== */
+    .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+    .price-card {
+      background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 6px;
+      padding: 2.5rem 2rem; text-align: center; transition: var(--transition); position: relative;
+    }
+    .price-card:hover { transform: translateY(-8px); border-color: rgba(255,255,255,0.25); box-shadow: 0 15px 35px rgba(0,0,0,0.8); }
+    .price-card.featured { border-color: #ffffff; }
+    .badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #ffffff; color: #000; padding: 0.2rem 1rem; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; border-radius: 20px; }
+    .price-card h3 { font-size: 1.5rem; color: #fff; margin-bottom: 0.5rem; }
+    .price-card .dimensions { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1.5rem; }
+    .price-card .price { font-size: 2.2rem; font-weight: 700; color: #fff; font-family: 'Playfair Display', serif; margin-bottom: 1.5rem; }
+    .price-card ul { list-style: none; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 2rem; line-height: 2; }
+
+    /* ==========================================================================
+       4. GALLERY GRID
+       ========================================================================== */
+    .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2rem; }
     .art-card {
       background: var(--bg-card); border: 1px solid var(--border-subtle);
-      border-radius: 6px; overflow: hidden; cursor: pointer; transition: var(--transition);
+      border-radius: 6px; overflow: hidden; cursor: pointer; transition: var(--transition); position: relative;
     }
     .art-card:hover { transform: translateY(-8px); border-color: rgba(255,255,255,0.25); box-shadow: 0 15px 35px rgba(0,0,0,0.8); }
-    
-    .img-box { position: relative; width: 100%; height: 400px; overflow: hidden; background: #000; }
-    .img-box img { width: 100%; height: 100%; object-fit: cover; object-position: center; transition: var(--transition); }
+    .img-box { position: relative; width: 100%; height: 380px; overflow: hidden; background: #000; }
+    .img-box img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition); }
     .art-card:hover .img-box img { transform: scale(1.05); }
-
     .art-info { padding: 1.25rem; }
     .art-info h3 { font-size: 1.15rem; color: #fff; margin-bottom: 0.3rem; }
     .art-info p { font-size: 0.85rem; color: var(--text-muted); }
+    .wip-tag { display: inline-block; font-size: 0.65rem; background: rgba(255,255,255,0.1); color: #fff; padding: 2px 8px; border-radius: 3px; text-transform: uppercase; letter-spacing: 1px; margin-top: 0.5rem; }
 
     /* Lightbox Modal */
     .lightbox {
@@ -102,6 +145,16 @@
     .lightbox-wrapper img { max-width: 100%; max-height: 75vh; object-fit: contain; border-radius: 4px; }
     .lightbox-caption { margin-top: 1rem; color: #ffffff; font-family: 'Playfair Display', serif; font-size: 1.1rem; }
     .lightbox-close { position: absolute; top: -40px; right: 0; color: #fff; font-size: 2rem; cursor: pointer; }
+
+    /* Floating WhatsApp Button */
+    .whatsapp-float {
+      position: fixed; bottom: 25px; right: 25px; width: 55px; height: 55px;
+      background-color: #25d366; border-radius: 50%; display: flex;
+      align-items: center; justify-content: center;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); z-index: 9999;
+      transition: transform 0.3s ease; text-decoration: none;
+    }
+    .whatsapp-float:hover { transform: scale(1.1); }
 
     /* Contact Section */
     .contact-section { padding: 5rem 8%; max-width: 750px; margin: 0 auto; }
@@ -116,6 +169,12 @@
 
     /* Footer */
     footer { text-align: center; padding: 3rem; border-top: 1px solid var(--border-subtle); color: var(--text-muted); font-size: 0.85rem; }
+
+    @media (max-width: 768px) {
+      .slider-container { height: 320px; }
+      .img-after img { width: 100%; }
+      .nav-links { display: none; }
+    }
   </style>
 </head>
 <body>
@@ -124,8 +183,10 @@
   <nav class="navbar">
     <div class="logo">DENARTS <span>STUDIO</span></div>
     <ul class="nav-links">
+      <li><a href="#process">Realism Process</a></li>
+      <li><a href="#pricing">Commission Rates</a></li>
       <li><a href="#gallery">Collection</a></li>
-      <li><a href="#contact">Commission</a></li>
+      <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
 
@@ -134,95 +195,154 @@
     <span class="hero-badge">Fine Art & Realism</span>
     <h1>Hyper-Realism in Pencil & Charcoal</h1>
     <p>Hand-drawn traditional artwork capturing intricate detail, deep shadows, and life-like texture.</p>
-    <a href="#gallery" class="btn">View Gallery</a>
+    <a href="#gallery" class="btn">View Collection</a>
   </header>
 
+  <!-- 1. INTERACTIVE BEFORE & AFTER SLIDER -->
+  <section id="process" class="slider-section">
+    <div class="section-title">
+      <h2>Reference vs. Hand-Drawn Realism</h2>
+      <p>Drag the slider to compare the digital photo reference against the finished pencil artwork</p>
+    </div>
+
+    <div class="slider-container" id="comparison-slider">
+      <!-- Photo Reference Underneath -->
+      <img src="images/igathe.jpg" class="slider-img" alt="Photo Reference">
+      
+      <!-- Hand Drawn Pencil Artwork On Top -->
+      <div class="slider-img img-after" id="after-img">
+        <img src="images/igathe.jpg" alt="Finished Pencil Drawing">
+      </div>
+
+      <div class="slider-handle" id="slider-handle">
+        <div class="handle-circle">◄ ►</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. COMMISSION PRICING GUIDE -->
+  <section id="pricing">
+    <div class="section-title">
+      <h2>Commission Pricing & Sizes</h2>
+      <p>Transparent rates for custom individual, family, and pet portraits</p>
+    </div>
+
+    <div class="pricing-grid">
+      <!-- A4 Size -->
+      <div class="price-card">
+        <h3>A4 Size</h3>
+        <p class="dimensions">8.3 x 11.7 Inches (21 x 29.7 cm)</p>
+        <div class="price">KSh 2,500</div>
+        <ul>
+          <li>Single Subject / Headshot</li>
+          <li>Staedtler Graphite on 220gsm Paper</li>
+          <li>Archival Fixative Sealed</li>
+          <li>3 - 5 Days Lead Time</li>
+        </ul>
+        <a href="#contact" class="btn">Order A4 Size</a>
+      </div>
+
+      <!-- A3 Size (Featured) -->
+      <div class="price-card featured">
+        <span class="badge">Most Popular</span>
+        <h3>A3 Size</h3>
+        <p class="dimensions">11.7 x 16.5 Inches (29.7 x 42 cm)</p>
+        <div class="price">KSh 4,500</div>
+        <ul>
+          <li>Up to 2 Subjects (Couples / Pets)</li>
+          <li>Graphite & Charcoal Combination</li>
+          <li>High Contrast & Deep Shadows</li>
+          <li>5 - 7 Days Lead Time</li>
+        </ul>
+        <a href="#contact" class="btn">Order A3 Size</a>
+      </div>
+
+      <!-- A2 Size -->
+      <div class="price-card">
+        <h3>A2 Size</h3>
+        <p class="dimensions">16.5 x 23.4 Inches (42 x 59.4 cm)</p>
+        <div class="price">KSh 9,000</div>
+        <ul>
+          <li>Large Family / Full Body Masterpiece</li>
+          <li>Heavy 300gsm Ivory Board</li>
+          <li>Extreme Texture & Lighting Detail</li>
+          <li>7 - 14 Days Lead Time</li>
+        </ul>
+        <a href="#contact" class="btn">Order A2 Size</a>
+      </div>
+    </div>
+  </section>
+
   <!-- GALLERY SECTION -->
-  <section id="gallery" class="gallery-section">
+  <section id="gallery">
     <div class="section-title">
       <h2>Featured Works</h2>
       <p>Click any piece to view full artwork details</p>
     </div>
 
     <div class="gallery-grid">
-
-      <!-- 1. Polycarp Igathe Portrait Study -->
-      <div class="art-card" onclick="openLightbox('images/igathe.jpg', 'Reference vs. Finished Drawing — Polycarp Igathe Portrait Study')">
-        <div class="img-box">
-          <img src="images/igathe.jpg" alt="Graphite Portrait Study">
-        </div>
+      <div class="art-card" onclick="openLightbox('images/igathe.jpg', 'Executive Portrait Study — Graphite Realism')">
+        <div class="img-box"><img src="images/igathe.jpg" alt="Graphite Portrait Study"></div>
         <div class="art-info">
           <h3>The Executive Portrait Study</h3>
           <p>Graphite Realism • A3 Size</p>
+          <span class="wip-tag">Hand-Drawn • 25+ Hours</span>
         </div>
       </div>
 
-      <!-- 2. Artist Exhibition & Studio Works -->
-      <div class="art-card" onclick="openLightbox('images/portrait-glasses.jpg', 'Denarts Studio Exhibition — Original Charcoal & Pastel Gallery Collection')">
-        <div class="img-box">
-          <img src="images/portrait-glasses.jpg" alt="Denarts Exhibition Gallery">
-        </div>
+      <div class="art-card" onclick="openLightbox('images/portrait-glasses.jpg', 'Denarts Studio Exhibition Collection')">
+        <div class="img-box"><img src="images/portrait-glasses.jpg" alt="Denarts Exhibition Gallery"></div>
         <div class="art-info">
           <h3>Studio Exhibition Collection</h3>
           <p>Charcoal, Pastel & Wildlife Art</p>
+          <span class="wip-tag">Exhibition Showcase</span>
         </div>
       </div>
 
-      <!-- 3. Framed Couple Portrait -->
-      <div class="art-card" onclick="openLightbox('images/framed-couple.jpg', 'Custom Framed Couple Portrait — High Contrast Graphite')">
-        <div class="img-box">
-          <img src="images/framed-couple.jpg" alt="Framed Couple Drawing">
-        </div>
+      <div class="art-card" onclick="openLightbox('images/framed-couple.jpg', 'Bond & Harmony — Custom Framed Couple Portrait')">
+        <div class="img-box"><img src="images/framed-couple.jpg" alt="Framed Couple Drawing"></div>
         <div class="art-info">
           <h3>Bond & Harmony</h3>
           <p>Framed Custom Portrait • A2 Size</p>
+          <span class="wip-tag">Custom Commission</span>
         </div>
       </div>
 
-      <!-- 4. Raised Fist Charcoal Study -->
-      <div class="art-card" onclick="openLightbox('images/raised-fist.jpg', 'Strength in Shadow — Charcoal & White Eraser Highlight')">
-        <div class="img-box">
-          <img src="images/raised-fist.jpg" alt="Raised Fist Charcoal Drawing">
-        </div>
+      <div class="art-card" onclick="openLightbox('images/raised-fist.jpg', 'Strength in Shadow — Charcoal Study')">
+        <div class="img-box"><img src="images/raised-fist.jpg" alt="Raised Fist Charcoal Drawing"></div>
         <div class="art-info">
           <h3>Strength in Shadow</h3>
           <p>Deep Shadow Charcoal • A3 Size</p>
+          <span class="wip-tag">Charcoal Study</span>
         </div>
       </div>
 
-      <!-- 5. Mother & Baby Embrace -->
       <div class="art-card" onclick="openLightbox('images/mother-baby.jpg', 'Maternal Embrace — Delicate Pencil Realism Study')">
-        <div class="img-box">
-          <img src="images/mother-baby.jpg" alt="Mother and Baby Artwork">
-        </div>
+        <div class="img-box"><img src="images/mother-baby.jpg" alt="Mother and Baby Artwork"></div>
         <div class="art-info">
           <h3>Maternal Embrace</h3>
           <p>Fine Detail Graphite • A3 Size</p>
+          <span class="wip-tag">High Realism</span>
         </div>
       </div>
 
-      <!-- 6. Zebra High Contrast Wildlife -->
-      <div class="art-card" onclick="openLightbox('images/zebra.jpg', 'Monochrome Stripes — Charcoal Wildlife Realism')">
-        <div class="img-box">
-          <img src="images/zebra.jpg" alt="High Contrast Zebra Drawing">
-        </div>
+      <div class="art-card" onclick="openLightbox('images/zebra.jpg', 'Monochrome Stripes — High Contrast Wildlife')">
+        <div class="img-box"><img src="images/zebra.jpg" alt="High Contrast Zebra Drawing"></div>
         <div class="art-info">
           <h3>Monochrome Stripes</h3>
           <p>High-Contrast Wildlife • A4 Size</p>
+          <span class="wip-tag">Wildlife Series</span>
         </div>
       </div>
 
-      <!-- 7. Tusker Cider Still Life -->
-      <div class="art-card" onclick="openLightbox('images/tusker-can.jpg', 'Tusker Cider Still Life — Color Pencil & Graphite Realism')">
-        <div class="img-box">
-          <img src="images/tusker-can.jpg" alt="Tusker Cider Pencil Drawing">
-        </div>
+      <div class="art-card" onclick="openLightbox('images/tusker-can.jpg', 'Tusker Cider Still Life — Color Pencil & Graphite')">
+        <div class="img-box"><img src="images/tusker-can.jpg" alt="Tusker Cider Pencil Drawing"></div>
         <div class="art-info">
           <h3>Tusker Cider Still Life</h3>
           <p>Colored Pencil & Graphite Realism</p>
+          <span class="wip-tag">Still Life Study</span>
         </div>
       </div>
-
     </div>
   </section>
 
@@ -234,6 +354,16 @@
       <div id="lightbox-caption" class="lightbox-caption"></div>
     </div>
   </div>
+
+  <!-- FLOATING WHATSAPP BUTTON -->
+  <a href="https://wa.me/254700000000?text=Hello%20Denarts!%20I%20am%20interested%20in%20a%20custom%20pencil%20artwork." 
+     class="whatsapp-float" 
+     target="_blank" 
+     aria-label="Chat on WhatsApp">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="#ffffff">
+      <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-1.157 4.228 4.301-1.127z"/>
+    </svg>
+  </a>
 
   <!-- CONTACT INQUIRY SECTION -->
   <section id="contact" class="contact-section">
@@ -259,20 +389,54 @@
 
       <div class="form-group">
         <label>Artwork Description</label>
-        <textarea id="art-desc" rows="5" required placeholder="Describe what you would like drawn (e.g. Single portrait, family drawing, pet artwork, or deadline requirements)..."></textarea>
+        <textarea id="art-desc" rows="5" required placeholder="Describe what you would like drawn..."></textarea>
       </div>
 
       <button type="submit" class="btn submit-btn">Inquire via WhatsApp</button>
     </form>
   </section>
 
-  <!-- FOOTER -->
   <footer>
     <p>&copy; 2026 Denarts Studio. All rights reserved.</p>
   </footer>
 
-  <!-- JAVASCRIPT -->
+  <!-- JAVASCRIPT FOR SLIDER, LIGHTBOX & WHATSAPP -->
   <script>
+    // 1. BEFORE/AFTER COMPARISON SLIDER SCRIPT
+    const slider = document.getElementById('comparison-slider');
+    const afterImg = document.getElementById('after-img');
+    const handle = document.getElementById('slider-handle');
+
+    let isSliding = false;
+
+    slider.addEventListener('mousedown', () => isSliding = true);
+    window.addEventListener('mouseup', () => isSliding = false);
+    window.addEventListener('mousemove', (e) => {
+      if (!isSliding) return;
+      let rect = slider.getBoundingClientRect();
+      let x = e.clientX - rect.left;
+      if (x < 0) x = 0;
+      if (x > rect.width) x = rect.width;
+      let percentage = (x / rect.width) * 100;
+      afterImg.style.width = percentage + '%';
+      handle.style.left = percentage + '%';
+    });
+
+    // Touch support for mobile phones
+    slider.addEventListener('touchstart', () => isSliding = true);
+    window.addEventListener('touchend', () => isSliding = false);
+    window.addEventListener('touchmove', (e) => {
+      if (!isSliding) return;
+      let rect = slider.getBoundingClientRect();
+      let x = e.touches[0].clientX - rect.left;
+      if (x < 0) x = 0;
+      if (x > rect.width) x = rect.width;
+      let percentage = (x / rect.width) * 100;
+      afterImg.style.width = percentage + '%';
+      handle.style.left = percentage + '%';
+    });
+
+    // 2. LIGHTBOX SCRIPT
     function openLightbox(src, caption) {
       document.getElementById('lightbox-img').src = src;
       document.getElementById('lightbox-caption').innerText = caption;
@@ -283,14 +447,15 @@
       document.getElementById('lightbox').classList.remove('active');
     }
 
+    // 3. WHATSAPP FORM SCRIPT
     function sendWhatsApp(e) {
       e.preventDefault();
       const name = document.getElementById('client-name').value;
       const size = document.getElementById('paper-size').value;
       const desc = document.getElementById('art-desc').value;
 
-      // Replace with your WhatsApp phone number with country code
-      const phone = "+254708348134"; 
+      // Enter your WhatsApp phone number with international country code (e.g., 254712345678)
+      const phone = "254700000000"; 
 
       const msg = `Hello Denarts! My name is ${name}. I am interested in a custom pencil artwork.%0A%0A*Paper Size:* ${size}%0A*Details:* ${desc}`;
       window.open(`https://wa.me/${phone}?text=${msg}`, '_blank');
